@@ -10,6 +10,9 @@ import com.example.semyon.myapplication.abstact.Animal;
 import com.example.semyon.myapplication.abstact.Dog;
 import com.example.semyon.myapplication.abstact.Cat;
 import com.example.semyon.myapplication.interfaces.InterfaceUseReturn;
+import com.example.semyon.myapplication.interfaces.MyAnimal;
+import com.example.semyon.myapplication.interfaces.TACls;
+import com.example.semyon.myapplication.interfaces.TCallBack;
 
 import java.util.Arrays;
 
@@ -29,11 +32,30 @@ public class MainActivity extends AppCompatActivity {
         testAbs();
         testInnerCls();
         testInterface();
+        testCallBack();
     }
 
     private void setupUI() {
         TextView txView = findViewById(R.id.textView);
 //        Log.e("semyon", "test");
+    }
+
+    private void testCallBack() {
+        TACls taObj = new TACls();
+        try {
+            taObj.test("call back", new TCallBack() {
+                @Override
+                public void success(String message) {
+                    Common.printf("call back message:" + message);
+                }
+            });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        MyAnimal animalObj = new MyAnimal();
+        animalObj.run();
+        animalObj.fly();
     }
 
     private void testInterface() {
